@@ -1,0 +1,13 @@
+cc_binary_host {
+    name: "aml_image_v2_packer",
+    srcs: [
+        "crc32.cpp",
+        "sha1.c",
+        "amlImage.cpp",
+        "sparse_format.cpp",
+    ],
+    cflags: [
+        "-D_LARGEFILE64_SOURCE",
+        "-D_FILE_OFFSET_BITS=64",
+    ],
+}
