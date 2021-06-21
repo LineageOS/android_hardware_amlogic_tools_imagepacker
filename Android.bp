@@ -1,5 +1,5 @@
 cc_binary_host {
-    name: "aml_image_v2_packer",
+    name: "aml_image_packer",
     srcs: [
         "crc32.cpp",
         "sha1.c",
