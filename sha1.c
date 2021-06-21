@@ -312,7 +312,7 @@ void sha1_csum (unsigned char *input, int ilen, unsigned char output[20])
  * bytes of input processed.
  */
 void sha1_csum_wd (unsigned char *input, int ilen, unsigned char output[20],
-			unsigned int chunk_sz)
+			unsigned int chunk_sz __attribute__((__unused__)))
 {
 	sha1_context ctx;
 #if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)

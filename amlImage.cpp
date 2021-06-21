@@ -316,7 +316,7 @@ static int image_get_item_count(HIMAGE hImage,const char* mainType)
 static int image_get_next_item(HIMAGE hImage,unsigned int iItem, char* maintype, char* subtype)
 {
 	FILE* fp = (FILE*)hImage;
-	unsigned int nItem = 0;
+
 	if(ImageDecoder->AmlFirmwareImg->crc==0){
 		memset(ImageDecoder->AmlFirmwareImg,0,sizeof(AmlFirmwareImg_t));
 		fseeko(fp,0,SEEK_SET);
@@ -358,7 +358,7 @@ static int image_get_next_item(HIMAGE hImage,unsigned int iItem, char* maintype,
 #define MTYPE_TAG       "main_type="
 #define STYPE_TAG       "sub_type="
 
-static int  image_cfg_parse(char *data,int length)
+static int  image_cfg_parse(char *data,int length __attribute__((__unused__)))
 {
 	int ret = 0;
 
@@ -510,9 +510,6 @@ static int image_check_files(const char* src_dir)
 static const ItemInfo* previous_duplicated_item_id(const FileList* headFileList, const FileList* const curFileList, 
         const ItemInfo* headItemInfo, const ItemInfo* curItemInfo)
 {
-    int itemId = -1;
-    int i = 0;
-
     for(;headFileList != curFileList && headFileList->next; headFileList = headFileList->next)
     {
         int rc = strcmp(curFileList->name, headFileList->name);
@@ -794,7 +791,6 @@ int image_unpack(const char* imagefile,const char *outpath)
 	char sub_type[32] = {0};
 	char outfile[512] = {0};
 	char cfgfile[128] = {0};
-	char buff[256] = {0};
 	
 	#ifdef BUILD_DLL
 	if(ImageDecoder->AmlFirmwareImg == NULL){
@@ -988,10 +984,7 @@ static const char * const usage = "%s usage:\n\
 int main(int argc, char * const* argv)
 {
 	int ret = 0;
-	int c = 0;
-	const char* optstring = "d:r:c:";
 
-	
 	if(argc < 3||argc > 5) {
 		printf("invalid arguments argc==%d\n", argc);
 		fprintf(stderr,usage,argv[0],argv[0],argv[0],argv[0]);
